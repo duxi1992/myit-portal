@@ -1,0 +1,81 @@
+name: Catalog CI + Security Scan
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Schema Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run catalog schema tests
+        run: npm test
+
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run catalog security scan
+        id: scan
+        run: node scripts/security-scan.js
+
+      - name: Post scan result as PR comment
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const result = JSON.parse(fs.readFileSync('scan-result.json', 'utf-8'));
+            const icon = result.score >= 80 ? '✅' : '❌';
+            const status = result.score >= 80 ? 'PASSED' : 'FAILED (below 80% threshold)';
+            const body = [
+              `## ${icon} Security Scan ${status}`,
+              `**Score: ${result.score}% OOTB Compliance**`,
+              '',
+              '| Check | Result |',
+              '|---|---|',
+              ...result.checks.map(c => `| ${c.name} | ${c.passed ? '✅ Pass' : '❌ ' + c.issue} |`),
+              '',
+              result.score >= 80
+                ? '_All checks passed. Ready for merge._'
+                : '_Fix the issues above before merging._'
+            ].join('\n');
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body
+            });
+
+  deploy:
+    name: Deploy to GitHub Pages
+    runs-on: ubuntu-latest
+    needs: [test, security-scan]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v4
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+      - id: deployment
+        uses: actions/deploy-pages@v4

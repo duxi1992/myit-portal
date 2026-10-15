@@ -1,0 +1,16 @@
+{
+  "name": "myit-portal",
+  "version": "1.0.0",
+  "description": "Siemens myIT Service Catalog Portal",
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/catalog/test_schema.js",
+    "test:watch": "node --test --watch tests/catalog/",
+    "serve": "npx serve . -l 8080"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "keywords": ["servicenow", "catalog", "itsm"],
+  "license": "UNLICENSED"
+}

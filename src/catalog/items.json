@@ -1,0 +1,46 @@
+[
+  {
+    "id": "SVC-001",
+    "title": "Laptop Provisioning",
+    "category": "Hardware",
+    "description": "Request a new or replacement laptop. Includes standard configuration, asset registration, and delivery to your desk.",
+    "owner": "IT Hardware Team",
+    "sla": "5 business days",
+    "icon": "💻",
+    "status": "active",
+    "tags": ["hardware", "onboarding", "standard"]
+  },
+  {
+    "id": "SVC-002",
+    "title": "VPN Access",
+    "category": "Network & Security",
+    "description": "Request remote access via VPN. Includes account creation, multi-factor authentication setup, and client installation.",
+    "owner": "Network Security Team",
+    "sla": "1 business day",
+    "icon": "🔐",
+    "status": "active",
+    "tags": ["vpn", "remote", "security"]
+  },
+  {
+    "id": "SVC-003",
+    "title": "Software License Request",
+    "category": "Software",
+    "description": "Request a license for approved software. Procurement, compliance check, and installation included.",
+    "owner": "Software Asset Management",
+    "sla": "3 business days",
+    "icon": "📦",
+    "status": "active",
+    "tags": ["software", "license", "procurement"]
+  },
+  {
+    "id": "SVC-004",
+    "title": "New Employee Onboarding",
+    "category": "HR & Access",
+    "description": "End-to-end onboarding: AD account, email, access rights, equipment, and first-day checklist.",
+    "owner": "IT Onboarding Team",
+    "sla": "2 business days",
+    "icon": "👤",
+    "status": "active",
+    "tags": ["onboarding", "hr", "access"]
+  }
+]

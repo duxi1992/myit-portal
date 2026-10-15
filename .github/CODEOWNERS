@@ -1,0 +1,15 @@
+# CODEOWNERS — protected paths require review from the listed team
+# Changes to these paths are blocked without approval
+
+# Core portal infrastructure — platform team only
+/src/core/          @siemens-it/platform-team
+
+# Security policies — CYS approval required
+/security/          @siemens-it/cys-security
+/.github/workflows/ @siemens-it/platform-team
+
+# Frontend — UX review required
+/index.html         @siemens-it/ux-team
+
+# Infrastructure as code
+/infra/             @siemens-it/infrastructure-team
