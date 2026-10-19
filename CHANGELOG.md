@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Added
+- SVC-005 Warranty Status Widget (CSM Team)
+
 ## [1.0.0] — 2026-10-15
 
 ### Added
