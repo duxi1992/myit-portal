@@ -42,5 +42,16 @@
     "icon": "👤",
     "status": "active",
     "tags": ["onboarding", "hr", "access"]
+  },
+  {
+    "id": "SVC-005",
+    "title": "Warranty Status Widget",
+    "category": "Operations",
+    "description": "Self-service warranty portal widget for customers to view coverage state, expiry date, and escalated claim status with role-based access.",
+    "owner": "CSM Team",
+    "sla": "5 business days",
+    "icon": "🔧",
+    "status": "active",
+    "tags": ["warranty", "self-service", "portal"]
   }
 ]
